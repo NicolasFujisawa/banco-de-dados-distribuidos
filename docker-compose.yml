@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  node_1: 
+    image: ubuntu:20.04
+    container_name: node_1_server
+    tty: true
+
+  node_2: 
+    image: ubuntu:20.04
+    container_name: node_2_server
+    tty: true
+
+  node_3: 
+    image: ubuntu:20.04
+    container_name: node_3_server
+    tty: true
