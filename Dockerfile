@@ -55,6 +55,7 @@ RUN ln -s ${MYSQL_HOME}/${MYSQL_FILE} /mysql; \
     useradd -g mysql mysql; \
     mkdir -p ${MYSQL_DATA_DIR}; \
     cd /mysql; \
+    scripts/mysql_install_db -user=mysql -datadir=${MYSQL_DATA_DIR}; \
     chown -R root:mysql .; \
     chown -R mysql:mysql ${MYSQL_DATA_DIR}; \
     mkdir -p /var/lib/mysql-cluster; \

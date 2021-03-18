@@ -7,10 +7,11 @@ services:
       context: .
       target: node
     image: mysql-master
-    tty: true
+    environment:
+      HOSTNAMES: node_one node_two
     volumes:
       - ./config/config.ini:/var/lib/mysql-cluster/config.ini
-    command: bash -c 'until [ 1 -gt 2 ];do echo Sleeping; sleep 10; done'
+    command: bash -c 'tail -f /var/lib/mysql-cluster/ndb_1_cluster.log'
   
   node_one:
     hostname: node_one
