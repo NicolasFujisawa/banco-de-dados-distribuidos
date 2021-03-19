@@ -30,8 +30,11 @@ COPY config/my.conf /etc/my.cnf
 
 COPY config/config.ini /var/lib/mysql-cluster/config.ini
 
-COPY entrypoint_node.sh /entrypoint.sh
+COPY entrypoint_node.sh utils/wait_nodes.sh /
 
-RUN chmod +x /entrypoint.sh ${MYSQL_HOME}/support-files/mysql.server
+RUN chmod +x /entrypoint_node.sh /wait_nodes.sh ${MYSQL_HOME}/support-files/mysql.server; \
+    mv bin/* /usr/bin; \
+    rm -rf bin; \
+    ln -s /usr/bin ${MYSQL_HOME}/bin
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint_node.sh" ]

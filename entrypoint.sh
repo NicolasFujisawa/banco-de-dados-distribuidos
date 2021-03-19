@@ -1,17 +1,5 @@
 #!/bin/bash
-
-function wait_nodes {
-	WAIT_HOSTNAMES_ARR=(${WAIT_HOSTNAMES})
-    echo "Waiting for $WAIT_HOSTNAMES"
-	
-	for HOSTNAME in "${WAIT_HOSTNAMES_ARR[@]}"; do
-		echo "Waiting for ${HOSTNAME}"
-		while ! getent hosts "${HOSTNAME}"; do
-			sleep 1
-		done
-	done
-}
-
+source /wait_nodes.sh
 wait_nodes
 
 ndb_mgmd -f /var/lib/mysql-cluster/config.ini \
