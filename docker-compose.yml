@@ -9,7 +9,7 @@ services:
       dockerfile: master.Dockerfile
     image: mysql-master
     environment:
-      HOSTNAMES: node_one node_two
+      WAIT_HOSTNAMES: node_one node_two
     volumes:
       - ./config/config.ini:/var/lib/mysql-cluster/config.ini
   
@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: node.Dockerfile
     environment:
-      HOSTNAMES: node_two
+      WAIT_HOSTNAMES: node_two
     image: mysql-node
     volumes:
       - node1:/usr/local/mysql/data
