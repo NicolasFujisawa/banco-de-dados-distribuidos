@@ -9,7 +9,7 @@ function wait_nodes {
 		while ! getent hosts "${HOSTNAME}"; do
 		    echo "Ping ${HOSTNAME} for $i times"
 			sleep 1
-            let "i++"
+			let "i++"
 		done
 	done
 }
