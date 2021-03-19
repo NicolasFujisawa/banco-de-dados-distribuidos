@@ -19,4 +19,4 @@ ndb_mgmd -f /var/lib/mysql-cluster/config.ini \
     --ndb-nodeid=1 \
     --reload
 
-exec "${@}"
+tail -f /var/lib/mysql-cluster/ndb_1_cluster.log
