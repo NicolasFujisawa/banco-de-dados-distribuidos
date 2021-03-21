@@ -1,9 +1,40 @@
 version: '3.8'
 
 services:
-  node:
-    build: .
-    image: ubuntu-20-node
-    deploy:
-      replicas: 3
-    tty: true
+  master:
+    hostname: cluster-master
+    container_name: master
+    build:
+      context: .
+      dockerfile: master.Dockerfile
+    image: mysql-master
+    environment:
+      WAIT_HOSTNAMES: node_one node_two
+    volumes:
+      - ./config/config.ini:/var/lib/mysql-cluster/config.ini
+  
+  node_one:
+    container_name: node_one
+    hostname: node_one
+    build:
+      context: .
+      dockerfile: node.Dockerfile
+    environment:
+      WAIT_HOSTNAMES: node_two
+    image: mysql-node
+    volumes:
+      - node1:/usr/local/mysql/data
+
+  node_two:
+    container_name: node_two
+    hostname: node_two
+    build:
+      context: .
+      dockerfile: node.Dockerfile
+    image: mysql-node
+    volumes:
+      - node2:/usr/local/mysql/data
+
+volumes:
+  node1:
+  node2:
