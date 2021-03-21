@@ -17,5 +17,5 @@ Abra 3 abas no seu terminal
 Execute
 
 ```bash
-docker exec -it banco-de-dados-distribuidos_node_(número do node 1-3) bash
+docker exec -it [master|node_one|node_two] bash
 ```
